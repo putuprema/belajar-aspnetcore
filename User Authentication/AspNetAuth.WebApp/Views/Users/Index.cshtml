@@ -1,0 +1,52 @@
+﻿@model AspNetAuth.WebApp.ViewModels.UsersListViewModel
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h1 class="mb-5">All Users</h1>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger mb-5" role="alert">
+        @Model.ErrorMessage
+    </div>
+}
+
+<form id="set-user-status-form" method="post">
+</form>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Display Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Active</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var (item, index) in Model.Users.Select((value, idx) => (value, idx + 1)))
+    {
+        <tr>
+            <td><strong>@index</strong></td>
+            <td>@item.DisplayName</td>
+            <td>@item.Email</td>
+            <td>@item.Role</td>
+            <td>@(item.Active ? "Yes" : "No")</td>
+            <td>
+                <button data-user-id="@item.Id" data-user-active="@item.Active" class="btn btn-outline-danger block-unblock-btn">
+                    @(item.Active ? "Block" : "Unblock")
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script src="~/js/pages/users-list/index.js" asp-append-version="true"></script>
+}

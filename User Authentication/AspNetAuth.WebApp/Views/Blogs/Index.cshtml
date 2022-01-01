@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "My Blogs";
+}
+
+<h1 class="mb-3">My Blogs</h1>
+<a role="button" class="btn btn-primary mb-4" asp-controller="Blogs" asp-action="New">
+    Add New Blog
+</a>
+
+<div class="blog-list-container">
+    <p>Loading...</p>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/blogs.js" asp-append-version="true"></script>
+}
